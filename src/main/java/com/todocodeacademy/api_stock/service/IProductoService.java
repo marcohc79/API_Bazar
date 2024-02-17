@@ -13,4 +13,5 @@ public interface IProductoService {
                              String nuevaMarca,
                              Integer nuevoCosto,
                              Integer nuevaCantidadDisponible);
+    public List<Producto> findFaltaStock();
 }

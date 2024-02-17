@@ -42,4 +42,9 @@ public class ProductoService implements IProductoService{
         this.saveProducto(producto);
     }
 
+    @Override
+    public List<Producto> findFaltaStock() {
+       return productoRepository.findFaltaStock();
+    }
+
 }

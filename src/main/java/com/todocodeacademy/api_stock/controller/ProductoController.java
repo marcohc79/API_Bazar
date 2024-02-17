@@ -43,4 +43,9 @@ public class ProductoController {
         productoService.editProducto(codigo_producto, nuevoNombre, nuevaMarca, nuevoCosto, nuevaCantidad);
         return "Se modifico correctamente";
     }
+
+    @GetMapping("/productos/falta_stock")
+    public List<Producto> faltaStock(){
+        return productoService.findFaltaStock();
+    }
 }
