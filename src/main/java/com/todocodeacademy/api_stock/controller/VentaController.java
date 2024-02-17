@@ -43,6 +43,6 @@ public class VentaController {
                           @RequestParam(required = false, name = "fecha_venta")LocalDate nuevaFecha,
                           @RequestParam(required = false, name = "id_cliente_venta") Long nuevoCliente) {
         ventaService.editVenta(codigo_venta, nuevaFecha, nuevoCliente);
-        return "Se modifica correctamente";
+        return "Venta modifica correctamente";
     }
 }
