@@ -1,5 +1,6 @@
 package com.todocodeacademy.api_stock.service;
 
+import com.todocodeacademy.api_stock.dto.MontoCantidadVentaDTO;
 import com.todocodeacademy.api_stock.dto.ProductoDTO;
 import com.todocodeacademy.api_stock.model.Cliente;
 import com.todocodeacademy.api_stock.model.Producto;
@@ -8,6 +9,7 @@ import com.todocodeacademy.api_stock.repository.IVentaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +71,7 @@ public class VentaService implements IVentaService{
     @Override
     public List<ProductoDTO> findProductosByCodigoVenta(Long codigoVenta) {
         List<Object[]>  resultadeQuery = ventaRepository.findProdutosByCodigoVenta(codigoVenta);
-        List<ProductoDTO> productosDTOS = new ArrayList<ProductoDTO>();
+        List<ProductoDTO> productosDTOS = new ArrayList<>();
 
         for (Object[] row : resultadeQuery){
             ProductoDTO productoDTO = new ProductoDTO();
@@ -80,5 +82,17 @@ public class VentaService implements IVentaService{
             productosDTOS.add(productoDTO);
         }
         return productosDTOS;
+    }
+
+    @Override
+    public MontoCantidadVentaDTO findMontoContidadVento(LocalDate fechaVenta) {
+        List<Object[]> resultadoQuery = ventaRepository.findMontoTotalCantidadVenta(fechaVenta);
+        MontoCantidadVentaDTO montoCantidadVentaDTO = new MontoCantidadVentaDTO();
+        if (!resultadoQuery.isEmpty() && resultadoQuery.get(0) != null){
+            Object[] row = resultadoQuery.get(0);
+            montoCantidadVentaDTO.setMonto_total(((Number) row[0]).intValue());
+            montoCantidadVentaDTO.setCantidad_venta(((Number) row[1]).intValue());
+        }
+        return montoCantidadVentaDTO;
     }
 }

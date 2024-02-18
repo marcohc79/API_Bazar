@@ -1,14 +1,14 @@
 package com.todocodeacademy.api_stock.controller;
 
+import com.todocodeacademy.api_stock.dto.MontoCantidadVentaDTO;
 import com.todocodeacademy.api_stock.dto.ProductoDTO;
-import com.todocodeacademy.api_stock.model.Producto;
 import com.todocodeacademy.api_stock.model.Venta;
 import com.todocodeacademy.api_stock.service.IVentaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -52,5 +52,10 @@ public class VentaController {
     @GetMapping("/ventas/productos/{codigo_venta}")
     public List<ProductoDTO> findProductosByCodigoVenta(@PathVariable Long codigo_venta){
         return ventaService.findProductosByCodigoVenta(codigo_venta);
+    }
+
+    @GetMapping("/ventas/fecha/{fecha_venta}")
+    public MontoCantidadVentaDTO findMontoCantidadVenta(@PathVariable("fecha_venta") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha_venta){
+        return ventaService.findMontoContidadVento(fecha_venta);
     }
 }
