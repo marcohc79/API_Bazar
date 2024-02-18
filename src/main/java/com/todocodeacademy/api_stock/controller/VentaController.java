@@ -1,11 +1,14 @@
 package com.todocodeacademy.api_stock.controller;
 
+import com.todocodeacademy.api_stock.dto.ProductoDTO;
+import com.todocodeacademy.api_stock.model.Producto;
 import com.todocodeacademy.api_stock.model.Venta;
 import com.todocodeacademy.api_stock.service.IVentaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -44,5 +47,10 @@ public class VentaController {
                           @RequestParam(required = false, name = "id_cliente_venta") Long nuevoCliente) {
         ventaService.editVenta(codigo_venta, nuevaFecha, nuevoCliente);
         return "Venta modifica correctamente";
+    }
+
+    @GetMapping("/ventas/productos/{codigo_venta}")
+    public List<ProductoDTO> findProductosByCodigoVenta(@PathVariable Long codigo_venta){
+        return ventaService.findProductosByCodigoVenta(codigo_venta);
     }
 }

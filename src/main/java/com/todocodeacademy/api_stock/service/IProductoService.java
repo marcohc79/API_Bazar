@@ -4,14 +4,14 @@ import com.todocodeacademy.api_stock.model.Producto;
 import java.util.List;
 
 public interface IProductoService {
-    public void saveProducto(Producto producto);
-    public void deleteProducto(Long id);
-    public List<Producto>  getProductos();
-    public Producto findProducto(Long id);
-    public void editProducto(Long idViejo,
+    void saveProducto(Producto producto);
+    void deleteProducto(Long id);
+    List<Producto>  getProductos();
+    Producto findProducto(Long id);
+    void editProducto(Long idViejo,
                              String nuevoNombre,
                              String nuevaMarca,
                              Integer nuevoCosto,
                              Integer nuevaCantidadDisponible);
-    public List<Producto> findFaltaStock();
+    List<Producto> findFaltaStock();
 }
